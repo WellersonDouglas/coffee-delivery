@@ -55,4 +55,20 @@ export const HeaderButton = styled.button<HeaderButtonProps>`
         color: ${theme.colors['brand-purple']};
       }
     `}
+
+    &:hover {
+    ${({ variant, theme }) => css`
+      background: ${theme.colors[`brand-${variant}-dark`]};
+      color: ${theme.colors[`brand-${variant}-light`]};
+    `}
+
+    /* Cod para so o icone pegar a cor forte */
+  ${({ variant, theme }) =>
+      variant === 'purple' &&
+      css`
+        svg {
+          color: ${theme.colors['brand-purple-light']};
+        }
+      `}
+  }
 `

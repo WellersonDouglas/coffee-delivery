@@ -46,7 +46,7 @@ export function CoffeeCard({ coffee }: CoffeProps) {
           </TitleText>
         </div>
         <AddCartWrapper>
-          <QuantityInput />
+          <QuantityInput size="small" />
           <button>
             <ShoppingCart size={22} weight="fill" />
           </button>
