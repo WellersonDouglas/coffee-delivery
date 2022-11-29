@@ -4,9 +4,30 @@ import confirmedOrderIllustration from '../../assets/confirmed-order.svg'
 import { InfoWithIcon } from '../../components/InfoWithIcon'
 import { useTheme } from 'styled-components'
 import { Clock, CreditCard, MapPin } from 'phosphor-react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { OrderData } from '../CompleteOrder'
+import { paymentMethod } from '../CompleteOrder/components/CompleteOrderForm/PaymentMethodOptions'
+import { useEffect } from 'react'
+
+interface LocationType {
+  state: OrderData
+}
 
 export function OrderConfirmedPage() {
   const { colors } = useTheme()
+
+  const { state } = useLocation() as unknown as LocationType
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!state) {
+      navigate('/')
+    }
+  }, [navigate, state])
+
+  if (!state) return <></>
+
   return (
     <OrderConfirmedContainer className="container">
       <div>
@@ -23,9 +44,12 @@ export function OrderConfirmedPage() {
             iconBg={colors['brand-purple']}
             text={
               <RegularText>
-                Entrega em <strong>Rua Luís de Camões, 26 3-F</strong>
+                Entrega em{' '}
+                <strong>
+                  {state.street}, {state.number} {state.complement}
+                </strong>
                 <br />
-                Arrentela - Seixal, Setubal
+                {state.district} - {state.city}, {state.uf}
               </RegularText>
             }
           />
@@ -49,7 +73,7 @@ export function OrderConfirmedPage() {
               <RegularText>
                 Pagamento na entrega
                 <br />
-                <strong>Cartão de Crédito</strong>
+                <strong>{paymentMethod[state.PaymentMethod].label}</strong>
               </RegularText>
             }
           />

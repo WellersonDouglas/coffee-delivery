@@ -9,9 +9,11 @@ const DELIVERY_PRICE = 3.5
 export function ConfirmationSection() {
   const { cartItemsTotal, cartQuantity } = useCart()
   const cartTotal = DELIVERY_PRICE + cartItemsTotal
+
   const formattedItemsTotal = formatMoney(cartItemsTotal)
   const formattedCartTotal = formatMoney(cartTotal)
   const formatDeliveryPrice = formatMoney(DELIVERY_PRICE)
+
   return (
     <ConfirmationSectionContainer>
       <div>
@@ -31,7 +33,11 @@ export function ConfirmationSection() {
         </RegularText>
       </div>
 
-      <Button text="Confirmar Pedido" disabled={cartQuantity <= 0} />
+      <Button
+        text="Confirmar Pedido"
+        disabled={cartQuantity <= 0}
+        type="submit"
+      />
     </ConfirmationSectionContainer>
   )
 }
